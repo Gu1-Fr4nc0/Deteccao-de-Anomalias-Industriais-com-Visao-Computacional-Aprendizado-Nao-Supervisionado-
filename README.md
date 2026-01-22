@@ -1,0 +1,1 @@
+# Deteccao-de-Anomalias-Industriais-com-Visao-Computacional-Aprendizado-Nao-Supervisionado-
