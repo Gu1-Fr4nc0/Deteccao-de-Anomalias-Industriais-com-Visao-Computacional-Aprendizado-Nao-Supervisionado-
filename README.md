@@ -85,7 +85,7 @@ Clone este repositório e instale as dependências:
 ```bash
 
 # Clone o repositório
-git clone [https://github.com/Gu1-Fr4nc0/anomalia-mvtec.git](https://github.com/Gu1-Fr4nc0/anomalia-mvtec.git)
+git clone [https://github.com/Gu1-Fr4nc0/industrial-anomaly-detection](https://github.com/Gu1-Fr4nc0/industrial-anomaly-detection)
 cd anomalia-mvtec
 
 # Instale as dependências
