@@ -36,8 +36,7 @@ O modelo foi treinado utilizando a categoria **`screw` (parafusos)** do dataset 
 
 A figura abaixo apresenta um exemplo de inferência em uma peça defeituosa, evidenciando uma ranhura no corpo do parafuso.
 
-> **Interpretação do heatmap:**  
-> Áreas em tons mais quentes indicam regiões onde o modelo apresentou maior erro de reconstrução, sugerindo a presença de anomalias visuais.
+> **Interpretação do heatmap:** > Áreas em tons mais quentes indicam regiões onde o modelo apresentou maior erro de reconstrução, sugerindo a presença de anomalias visuais.
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/2cad4a36-505e-476a-8a6f-1e452458536d" alt="Resultado da Detecção de Anomalia" width="800">
@@ -47,11 +46,11 @@ A figura abaixo apresenta um exemplo de inferência em uma peça defeituosa, evi
 
 ## 📈 Avaliação Qualitativa
 
-- Imagens normais apresentam baixo erro de reconstrução.
-- Defeitos estruturais são destacados de forma consistente nos mapas de erro.
-- O método se mostrou sensível a defeitos locais, mesmo sem exemplos defeituosos no treinamento.
+- **Robustez:** Imagens normais apresentam baixo erro de reconstrução.
+- **Localização:** Defeitos estruturais são destacados de forma consistente nos mapas de erro.
+- **Sensibilidade:** O método se mostrou capaz de identificar defeitos locais, mesmo sem ter visto exemplos defeituosos no treinamento.
 
-> Este projeto tem caráter de **prova de conceito**, priorizando interpretabilidade e generalização sobre otimização extrema de métricas.
+> 💡 Este projeto tem caráter de **prova de conceito**, priorizando a interpretabilidade e a validação da hipótese de *Unsupervised Learning*.
 
 ---
 
@@ -59,7 +58,7 @@ A figura abaixo apresenta um exemplo de inferência em uma peça defeituosa, evi
 
 - **Modelo:** Autoencoder Convolucional (CNN)
 - **Framework:** PyTorch
-- **Dataset:** MVTec Anomaly Detection — Categoria `screw`
+- **Dataset:** [MVTec Anomaly Detection](https://www.mvtec.com/company/research/datasets/mvtec-ad) — Categoria `screw`
 - **Função de perda:** Mean Squared Error (MSE)
 - **Pré-processamento:** Redimensionamento para 128×128 e normalização
 - **Aceleração:** GPU via CUDA (quando disponível)
@@ -69,7 +68,7 @@ A figura abaixo apresenta um exemplo de inferência em uma peça defeituosa, evi
 ## 📂 Estrutura do Repositório
 
 ```bash
-├── data/                  # Dataset MVTec AD
+├── data/                  # Dataset MVTec AD (Gitignored)
 ├── src/
 │   ├── model.py           # Arquitetura do Autoencoder
 │   ├── dataset.py         # Dataset e DataLoader customizados
@@ -80,45 +79,65 @@ A figura abaixo apresenta um exemplo de inferência em uma peça defeituosa, evi
 └── requirements.txt       # Dependências
 ```
 ## 🚀 Como Executar
-1. Clonar o repositório e instalar dependências
-bash
-Copiar código
-git clone [LINK_DO_SEU_REPO]
-cd [NOME_DA_PASTA]
-pip install -r requirements.txt
-2. Preparar o Dataset
-Baixe a categoria screw do dataset MVTec Anomaly Detection e organize da seguinte forma:
+1. Instalação
+Clone este repositório e instale as dependências:
 
-text
-Copiar código
-data/mvtec_anomaly_detection/screw/
+```bash
+
+# Clone o repositório
+git clone [https://github.com/Gu1-Fr4nc0/anomalia-mvtec.git](https://github.com/Gu1-Fr4nc0/anomalia-mvtec.git)
+cd anomalia-mvtec
+
+# Instale as dependências
+pip install -r requirements.txt
+```
+2. Preparação do Dataset
+Baixe a categoria screw do dataset MVTec Anomaly Detection e organize a pasta data/ da seguinte forma:
+
+```Plaintext
+data/
+└── mvtec_anomaly_detection/
+    └── screw/
+        ├── train/
+        └── test/
+```
 3. Treinamento (Opcional)
-bash
-Copiar código
+Para treinar o modelo do zero:
+
+```bash
+
 python train.py
 O modelo treinado será salvo na pasta weights/ após 100 épocas.
-
+```
 4. Inferência
-bash
-Copiar código
+Para testar a detecção em uma imagem de teste aleatória:
+
+
+```bash
+
 python inference.py
+
+```
 O script seleciona uma amostra defeituosa e exibe o mapa de anomalia correspondente.
 
 ## ⚠️ Limitações Conhecidas
-O método é sensível à escolha do limiar de erro.
+Definição de Limiar: O método é sensível à escolha do threshold para classificar o que é defeito ou ruído.
 
-Autoencoders podem reconstruir parcialmente defeitos sutis.
+Defeitos Sutis: Autoencoders muito potentes podem acabar "reconstruindo" defeitos pequenos, mascarando a anomalia.
 
-Não há otimização específica para tempo real ou edge devices.
+Performance: Não houve otimização específica para latência de tempo real ou dispositivos de borda (Edge Devices) nesta etapa.
 
 ## 🔮 Próximos Passos
-Comparação com métodos baseados em embeddings (k-NN, Mahalanobis)
+[ ] Comparação com métodos baseados em embeddings (k-NN, Mahalanobis).
 
-Avaliação quantitativa com ROC-AUC
+[ ] Avaliação quantitativa com métricas de ROC-AUC.
 
-Aplicação em outras categorias do MVTec AD
+[ ] Testes de robustez com outras categorias do MVTec AD.
 
-Deploy do modelo via API REST
+[ ] Deploy do modelo via API (FastAPI/Flask).
 
-Desenvolvido por Guilherme Pança Franco
-Projeto aplicado em Engenharia de Computação e Visão Computacional
+<div align="center">
+
+Desenvolvido por Guilherme Pança Franco Projeto aplicado em Engenharia de Computação e Visão Computacional
+
+</div>
