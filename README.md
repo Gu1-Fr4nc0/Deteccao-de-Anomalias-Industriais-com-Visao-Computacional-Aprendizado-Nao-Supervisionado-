@@ -107,8 +107,8 @@ Para treinar o modelo do zero:
 ```bash
 
 python train.py
-O modelo treinado será salvo na pasta weights/ após 100 épocas.
 ```
+O modelo treinado será salvo na pasta weights/ após 100 épocas.
 4. Inferência
 Para testar a detecção em uma imagem de teste aleatória:
 
